@@ -137,7 +137,7 @@ void BubbleSort::Sort()
             }
         }
         std::reverse(tmp_vec.begin(), tmp_vec.end());
-        matrix[i] = ReturningValues(tmp_vec, matrix[i]);
+        ReturningValues(tmp_vec, matrix[i]);
     }
     comparison_counter = tmp_comparison_counter;
     permutation_counter = tmp_permutation_counter;
