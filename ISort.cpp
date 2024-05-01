@@ -2,16 +2,29 @@
 #include"Algoritm.h"
 
 ISort::ISort(std::vector<std::vector<int>>_matrix) :matrix{ _matrix } {}
-
+std::string ISort::GetName() {
+    return name;
+}
+int ISort::GetComparisonCounter()
+{
+    return comparison_counter;
+}
+int ISort::GetPermutationCounter()
+{
+    return permutation_counter;
+}
+std::vector<std::vector<int>> ISort::GetMatrix()
+{
+    return matrix;
+}
 void SelectionSort::Sort()
 {
-    std::string name = "SelectionSort";
     int tmp_comparison_counter = 0;
     int tmp_permutation_counter = 0;
     int min = 0;
-    for (int i = 0; i < matrix.size(); i++) {
-        std::vector<int> tmp_vec = EvenSampling(matrix[i]);
-        if (tmp_vec.size() > 2) {
+    for (int i = 0; i < matrix[0].size(); i++) {
+        std::vector<int> tmp_vec = EvenSampling(matrix,i);
+        if (tmp_vec.size() >= 2) {
             for (int j = 0; j < tmp_vec.size(); j++)
             {
                 min = j; // запоминаем индекс текущего элемента
@@ -23,35 +36,34 @@ void SelectionSort::Sort()
                         min = k;       // запоминаем его индекс в max
                 }
                 if (min != j) {
-                    swap(tmp_vec[j], tmp_vec[min]);
+                    std::swap(tmp_vec[j], tmp_vec[min]);
                     tmp_permutation_counter++;
                 }
 
             }
             std::reverse(tmp_vec.begin(), tmp_vec.end());
-            matrix[i] = ReturningValues(tmp_vec, matrix[i]);
+            matrix=  ReturningValues(tmp_vec, matrix,i);
         }
     }
     comparison_counter = tmp_comparison_counter;
     permutation_counter = tmp_permutation_counter;
 }
-std::string SelectionSort::GetName() {
-    return name;
-}
 SelectionSort::SelectionSort(std::vector<std::vector<int>>matrix) :ISort{ matrix }
-{}
+{
+    name = "SelectionSort";
+}
 
 void InsertionSort::Sort()
 {
     int tmp_comparison_counter = 0;
     int tmp_permutation_counter = 0;
-    for (int i = 0; i < matrix.size(); i++) {
-        std::vector<int> tmp_vec = EvenSampling(matrix[i]);
-        if (tmp_vec.size() > 2) {
+    for (int i = 0; i < matrix[0].size(); i++) {
+        std::vector<int> tmp_vec = EvenSampling(matrix, i);
+        if (tmp_vec.size() >= 2) {
             for (int k = 1; k < tmp_vec.size(); k++)
             {
 
-                double temp = tmp_vec[k];
+                int temp = tmp_vec[k];
                 int j = k - 1;
                 tmp_comparison_counter++;
                 while (j >= 0 && temp < tmp_vec[j])
@@ -67,31 +79,30 @@ void InsertionSort::Sort()
                 tmp_vec[j + 1] = temp;
             }
             std::reverse(tmp_vec.begin(), tmp_vec.end());
-            matrix[i] = ReturningValues(tmp_vec, matrix[i]);
+            matrix= ReturningValues(tmp_vec, matrix, i);
         }
     }
     comparison_counter = tmp_comparison_counter;
     permutation_counter = tmp_permutation_counter;
 }
-std::string InsertionSort::GetName() {
-    return name;
-}
 InsertionSort::InsertionSort(std::vector<std::vector<int>>matrix) :ISort{ matrix }
-{}
+{
+    name = "InsertionSort";
+}
 
 void ShellSort::Sort()
 {
     int tmp_comparison_counter = 0;
     int tmp_permutation_counter = 0;
  
-    for (int j = 0; j < matrix.size(); j++)
+    for (int j = 0; j < matrix[0].size(); j++)
     {
-        std::vector<int> tmp_vec = EvenSampling(matrix[j]);
-        if (tmp_vec.size() > 2) {
-            for (int gap = tmp_vec.size() / 2; gap > 0; gap /= 2) {
+        std::vector<int> tmp_vec = EvenSampling(matrix,j);
+        if (tmp_vec.size() >= 2) {
+            for (int gap = static_cast<unsigned int>(tmp_vec.size()) / 2; gap > 0; gap /= 2) {
                 for (int i = gap; i < tmp_vec.size(); i++) {
 
-                    double temp = tmp_vec[i];
+                    int temp = tmp_vec[i];
                     int k;
                     tmp_comparison_counter++;
                     for (k = i; k >= gap && tmp_vec[k - gap] > temp; k -= gap) {
@@ -102,32 +113,31 @@ void ShellSort::Sort()
             }
         }
         std::reverse(tmp_vec.begin(), tmp_vec.end());
-        matrix[j] = ReturningValues(tmp_vec, matrix[j]);
+        matrix= ReturningValues(tmp_vec, matrix, j);
 }
     comparison_counter = tmp_comparison_counter;
     permutation_counter = tmp_permutation_counter;
 }
-std::string ShellSort::GetName() {
-    return name;
-}
 ShellSort::ShellSort(std::vector<std::vector<int>>matrix) :ISort{ matrix }
-{}
+{
+    name = "ShellSort";
+}
 
 void BubbleSort::Sort()
 {
     int tmp_comparison_counter = 0;
     int tmp_permutation_counter = 0;
    
-    for (int i = 0; i < matrix.size(); i++) {
-        std::vector<int> tmp_vec = EvenSampling(matrix[i]);
-        if (tmp_vec.size() > 2) {
+    for (int i = 0; i < matrix[0].size(); i++) {
+        std::vector<int> tmp_vec = EvenSampling(matrix,i);
+        if (tmp_vec.size() >= 2) {
             for (int j = 0; j < tmp_vec.size(); j++) {
                 bool flag = true;
                 for (int k = 0; k < tmp_vec.size() - (j + 1); k++) {
                     tmp_comparison_counter++;
                     if (tmp_vec[k] > tmp_vec[k + 1]) {
                         flag = false;
-                        swap(tmp_vec[k], tmp_vec[k + 1]);
+                        std::swap(tmp_vec[k], tmp_vec[k + 1]);
                         tmp_permutation_counter++;
                     }
                 }
@@ -137,16 +147,15 @@ void BubbleSort::Sort()
             }
         }
         std::reverse(tmp_vec.begin(), tmp_vec.end());
-        ReturningValues(tmp_vec, matrix[i]);
+        matrix=ReturningValues(tmp_vec, matrix,i);
     }
     comparison_counter = tmp_comparison_counter;
     permutation_counter = tmp_permutation_counter;
 }
-std::string BubbleSort::GetName() {
-    return name;
-}
 BubbleSort::BubbleSort(std::vector<std::vector<int>>matrix) :ISort{ matrix }
-{}
+{
+    name = "BubbleSort";
+}
 
 void QuickSortMat::QuickSort(std::vector<int>&arr, int start, int end)
 {
@@ -165,29 +174,30 @@ int QuickSortMat::Partition(std::vector<int>& arr, int start, int end)
         tmp_comparison_counter++;
         if (arr[i] < arr[pivot]) {
             tmp_permutation_counter++;
-            swap(arr[i], arr[j]);
+            std::swap(arr[i], arr[j]);
             ++j;
         }
     }
    
-        swap(arr[j], arr[pivot]);
+        std::swap(arr[j], arr[pivot]);
   
     return j;
 
 }
 void QuickSortMat::Sort()
 {
-   for (int i = 0; i < matrix.size(); i++) {
-       std::vector<int> tmp_vec = EvenSampling(matrix[i]);
-       if (tmp_vec.size() > 2) {
-           QuickSort(tmp_vec, 0, tmp_vec.size() - 1);
+   for (int i = 0; i < matrix[0].size(); i++) {
+       std::vector<int> tmp_vec = EvenSampling(matrix,i);
+       if (tmp_vec.size() >= 2) {
+           QuickSort(tmp_vec, 0, static_cast<unsigned int>(tmp_vec.size()) - 1);
        }
+       std::reverse(tmp_vec.begin(), tmp_vec.end());
+       matrix=ReturningValues(tmp_vec, matrix,i);
    }
     comparison_counter = tmp_comparison_counter;
     permutation_counter = tmp_permutation_counter;
 }
-std::string QuickSortMat::GetName() {
-    return name;
-}
 QuickSortMat::QuickSortMat(std::vector<std::vector<int>>matrix) :ISort{ matrix }
-{}
+{
+    name = "QuickSort";
+}

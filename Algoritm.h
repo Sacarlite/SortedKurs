@@ -1,13 +1,11 @@
 #pragma once
-#include "Check.h"
 #include "ISort.h"
 #include <iomanip>
 #include <ctime>
+#include <string>
 
-std::vector<int> EvenSampling(std::vector<int>);//TODO сделать функцию фильтрации положительных значений
-std::vector<int> ReturningValues(std::vector<int>, std::vector<int>);
-template <class T> void swap(T& a, T& b)
-{
-	T c(a); a = b; b = c;
-}
+std::vector<int> EvenSampling(std::vector<std::vector<int>> originalVec, int j);
+std::vector<std::vector<int>> ReturningValues(std::vector<int> tmp_vec, std::vector<std::vector<int>> originalVec, int j);
+int GetLargestNumPermutations(std::vector<ISort*> infoVec);
+int GetLargestNumComparison(std::vector<ISort*> infoVec);
 

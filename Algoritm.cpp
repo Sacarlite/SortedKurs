@@ -1,80 +1,48 @@
 #include "Algoritm.h"
-void ConsoleInput(double** matrix, int n, int m)
+
+std::vector<int> EvenSampling(std::vector<std::vector<int>> originalVec,int j) {
+	std::vector<int> evenVec;
+	for (int i = 0; i < originalVec.size(); i++) {
+		if (originalVec[i][j] % 2 == 0) {
+			evenVec.push_back(originalVec[i][j]);
+		}
+	}
+	return evenVec;
+}
+//АХТУНГ КОСТЫЛЬ
+std::vector<std::vector<int>> ReturningValues(std::vector<int> tmp_vec, std::vector<std::vector<int>> originalVec, int j) {
+	std::vector<std::vector<int>> tmp_originalVec;
+	tmp_originalVec.assign(originalVec.begin(), originalVec.end());
+	int counter = 0;
+	for (int i = 0; i < tmp_originalVec.size(); i++) {
+		if (tmp_originalVec[i][j] % 2 == 0) {
+			tmp_originalVec[i][j] = tmp_vec[counter];
+			counter++;
+		}
+	}
+	return tmp_originalVec;
+}
+
+int GetLargestNumPermutations(std::vector<ISort*> infoVec)
 {
-	for (int i = 0; i <n ; i++)
+	int num = infoVec[0]->GetPermutationCounter();
+	for (int i = 1; i < infoVec.size(); ++i)
 	{
-		for (int j = 0; j < m; j++) {
-			
-			std::cout << "matrix[" << i+1 << "][" << j+1<< "]="  << std::endl;
-			matrix[i][j] = GetDouble();
-			std::cout << "" << std::endl;
+		if (infoVec[i]->GetPermutationCounter() > num) {
+			num = infoVec[i]->GetPermutationCounter();
 		}
 	}
+	return static_cast<int>(std::to_string(num).length());
 }
 
-void RandomInput(double** matrix, int n, int m)
+int GetLargestNumComparison(std::vector<ISort*> infoVec)
 {
-	const int lower_bound=-25;
-	const int higher_bound=50;
-	srand(static_cast<unsigned int>(time(NULL)));
-	for (int i = 0; i < n; i++)
+	int num = infoVec[0]->GetComparisonCounter();
+	for (int i = 1; i < infoVec.size(); ++i)
 	{
-		for (int j = 0; j < m; j++) {
-			matrix[i][j] = lower_bound + rand() % (higher_bound + 1) + rand() / (RAND_MAX + 1.0);
+		if (infoVec[i]->GetComparisonCounter() > num) {
+			num = infoVec[i]->GetComparisonCounter();
 		}
 	}
-
+	return static_cast<int>(std::to_string(num).length());
 }
-
-void copy(int** a, int** b, int n, int m)
-{
-		for (int j = 0; j < m; j++)
-			if (a[n][j] % 2 == 0) {
-				a[n][j] = b[n][j];
-			}
-}
-
-void ConsoleOutput(double** matrix, int n, int m)
-{
-	for (int i = 0; i < n; ++i)
-	{
-		for (int j = 0; j < m; ++j)
-			std::cout << std::setw(12) << matrix[i][j]<<" ";
-		std::cout << std::endl;
-	}
-}
-
-
-
-void ShowResult(std::vector<std::shared_ptr<result>>& sort, int n, int m)
-{
-	for (int index = 0; index < 5; index++) {
-		std::cout << "Название метода сортировки: " << sort[index]->name << std::endl;
-		std::cout << "Колличество сравнений: " << sort[index]->comparison_counter << std::endl;
-		std::cout << "Колличество перестановок: " << sort[index]->permutation_counter << std::endl;
-		std::cout << "Результирующая матрица: " << std::endl;
-		double** showed_matrix = nullptr;
-		showed_matrix = sort[index]->new_matrix;
-		for (int i = 0; i < n; i++)
-		{
-			for (int j = 0; j < m; j++)
-				std::cout << std::setw(12) << showed_matrix[i][j] << " ";
-			std::cout << std::endl;
-		}
-	}
-	std::cout << std::endl;
-	std::cout << "Название метода сортировки       сравнения        перестановоки" << std::endl;
-	for (int index = 0; index < 5; index++) {
-		if (sort[index]->name == "SelectionSort" || sort[index]->name == "InsertionSort") {
-			std::cout << sort[index]->name << "                        " << sort[index]->comparison_counter << "                  " << sort[index]->permutation_counter << std::endl;
-		}
-		else if(sort[index]->name == "BubbleSort") {
-			std::cout << sort[index]->name << "                           " << sort[index]->comparison_counter << "                  " << sort[index]->permutation_counter << std::endl;
-		}
-		else {
-			std::cout << sort[index]->name << "                             " << sort[index]->comparison_counter << "                 " << sort[index]->permutation_counter << std::endl;
-		}
-	}
-	
-}
-
