@@ -1,17 +1,18 @@
 #include "ConsoleOutput.h"
+/*Вывод матрицы на консоль*/
 void MatrixOutput(std::vector<std::vector<int>> intVec)
 {
-	for (int i = 0; i < intVec.size(); ++i)
+	for (int i = 0; i < intVec.size(); ++i)//Перебор матрицы по строкам
 	{
-		for (int j = 0; j < intVec[i].size(); ++j)
+		for (int j = 0; j < intVec[i].size(); ++j)//Перебор матрицы по столбцам
 			std::cout << std::setw(12) << intVec[i][j] << " ";
 		std::cout << std::endl;
 	}
 }
-//TODO доделать форматированный вывод
-void SortInfoOutput(std::vector<ISort*> infoVec)
+/*Вывод информации о сортировках на консоль*/
+void SortInfoOutput(std::vector<std::shared_ptr<ISort>> infoVec)
 {
-	const int INDENT = 26;
+	const int INDENT = 26;//Колличество символов в информационной строке
 	for (int i = 0; i < infoVec.size(); ++i)
 	{
 		
@@ -23,8 +24,8 @@ void SortInfoOutput(std::vector<ISort*> infoVec)
 		std::cout << std::endl;
 	}
 	std::cout << "Сравнительная таблица: " << std::endl;
-	int largestNumPermutations = GetLargestNumPermutations(infoVec);
-	int largestNumComparison = GetLargestNumComparison(infoVec);
+	int largestNumPermutations = GetLargestNumPermutations(infoVec);//Получение самого большого числа перестановок
+	int largestNumComparison = GetLargestNumComparison(infoVec);//Получение самого большого числа сравнений
 	std::cout << "Метод" << std::setw(INDENT - 5 + largestNumPermutations) << std::right <<"Перестановки" << std::setw(largestNumComparison+10) << "Сравнения" << std::endl;
 	for (int i = 0; i < infoVec.size(); ++i)
 	{

@@ -28,7 +28,7 @@ void ShowInputOption()
 
 void ShowGreetings()
 {
-	std::cout << "Курсовая работа  Кутькина Олеся 4304г" << std::endl;
+	std::cout << "Курсовая работа по теме сортироки. Кутькина Олеся 4304г. Вариант №12" << std::endl;
 }
 
 void ShowOutputType()

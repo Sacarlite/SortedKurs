@@ -17,7 +17,8 @@ std::vector<std::vector<int>> FileDataInput()
 				std::cout << "Не верное разрешение у файла.Повторитие попытку. " << std::endl;
 				continue;
 			}
-			if (!std::filesystem::is_regular_file(fileName)) {//Проверка на системные фаилы
+			file.open(fileName);//Открытия фаила для чтения
+			if (std::filesystem::is_regular_file(fileName)) {//Проверка на системные фаилы
 				std::cout << "Фаил открыт успешно. " << std::endl;
 			}
 		}
@@ -28,15 +29,16 @@ std::vector<std::vector<int>> FileDataInput()
 
 		}
 		try {
-			file.open(fileName);//Открытия фаила для чтения
-			std::vector<int> tmpVec;
-			std::string str;
-			int n = CheckLineI(file);
-			int m = CheckLineI(file);
+			
+			std::vector<int> tmpVec;//Объявление строки матрицы 
+			std::string str;//Объявление вводимой строки 
+			int n = CheckLineIMoreThen1(file);//Считывания количества строк
+			int m = CheckLineIMoreThen0(file);//Считывая количества столбоцов 
 			for (int i = 0; i < n; i++) {
-				str = CheckLineS(file);
+				str = CheckLineS(file);//Считывния строки
 				std::vector<std::string> strin;
 				std::string tmp_string;
+				/*Считывания эдемента матрицы*/
 				for (int j = 0; j <= str.size(); j++) {
 					if ((!isdigit(str[j])) || str[j] == '\n')
 					{
@@ -45,22 +47,17 @@ std::vector<std::vector<int>> FileDataInput()
 					}
 					tmp_string += str[j];
 				}
-
+				//Удаляем пробелы
 				for (int k = 0; k < strin.size(); k++) {
-					if (strin[k] == " ") {
-						strin.erase(strin.begin() + k);
+					if (strin[k]!=" "&& strin[k] != "") {
+						tmpVec.push_back(std::stoi(strin[k]));
 					}
 				}
-				if (strin.size() != m) {
+				if (tmpVec.size() != m) {//Если столбцов больше чем должно быть генирируется ошибка
+					tmpVec.clear();
 					throw std::exception();
 				}
-				for (int j = 0; j < m; j++) {
-					if (std::stoi(strin[j]) < 0) {
-						throw std::exception();
-					}
-					tmpVec.push_back(std::stoi(strin[j]));
-				}
-				matrix.push_back(tmpVec);
+				matrix.push_back(tmpVec);//Добавление строки матрицы
 				tmpVec.clear();
 			}
 		}

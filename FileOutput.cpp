@@ -36,7 +36,7 @@ void WriteInputData(std::vector<std::vector<int>> matrix, std::string fileName)/
 		throw FileWriteException("Невозможно записать данные в файл.Повторите попытку.");//Выброс пользовательской ошибки фаилового вывода
 	}
 }
-void WriteOutData(std::vector<ISort*> infoVec, std::string fileName, std::vector<std::vector<int>> matrix)//Функция записи данных квартир в фаил
+void WriteOutData(std::vector<std::shared_ptr<ISort>> infoVec, std::string fileName, std::vector<std::vector<int>> matrix)//Функция записи данных квартир в фаил
 {
 	const int INDENT = 26;
 	std::ofstream  out;//Создания потока записи в фаил
@@ -145,7 +145,7 @@ void InputDataFileOutput(std::vector<std::vector<int>> matrix)
 
 }
 
-void OutDataFileOutput(std::vector<ISort*> infoVec, std::vector<std::vector<int>> matrix)
+void OutDataFileOutput(std::vector<std::shared_ptr<ISort>> infoVec, std::vector<std::vector<int>> matrix)
 {
 	std::ifstream out2;//Создания потока чтения из фаила
 	std::string fileName;//Переменная имени или пути фаила

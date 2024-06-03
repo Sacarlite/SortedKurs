@@ -1,7 +1,8 @@
-#include "Checks.h"
-#include <iostream>
-#include <fstream>
-#include <string>
+#include "Checks.h"//Подключение HeaderFile с проверками пользовательского ввода
+#include <iostream>//Библеотека ввода и вывода
+#include <fstream>//Библеотека файлового ввода и вывода
+#include <string>//Библеотека строк
+/*Функция ввода с консоли целого положительного значения больше 1*/
 int GetPositiveIntMoreThen1()
 {
     while (true) {
@@ -27,7 +28,7 @@ int GetPositiveIntMoreThen1()
 
     }
 }
-
+/*Функция ввода с консоли целого положительного значения больше 0*/
 int GetPositiveIntMoreThen0()
 {
     while (true) {
@@ -53,23 +54,17 @@ int GetPositiveIntMoreThen0()
 
     }
 }
-
-int GetPositiveInt()
+/*Функция ввода с консоли целого  значения*/
+int GetInt()
 {
     while (true) {
         std::string str;//Объявление переменной строки
         std::cin >> str;//Ввод строки с консоли
         try {
             int value = std::stoi(str);//Перевод строки в целочисленное значение
-            if (value >= 0) {
                 std::cin.clear();//Возврат поток ввода в рабочее состояние 
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');//Игнорирование всех символов в потоке
                 return value;
-
-            }
-            else {
-                throw std::exception();//Выбрасывание ошибки
-            }
         }
         catch (std::exception&) {//Обработка произошедшей ошибки
             std::cin.clear();//Возврат поток ввода в рабочее состояние 
@@ -79,7 +74,7 @@ int GetPositiveInt()
 
     }
 }
-
+/*Функция ввода пользовательского выбора*/
 int GetChoise()
 {
     while (true) {
@@ -104,7 +99,7 @@ int GetChoise()
         }
     }
 }
-
+/*Функция ввода пользовательского выбора пункта меню*/
 int GetMenuChoise()
 {
     while (true) {
@@ -129,8 +124,8 @@ int GetMenuChoise()
         }
     }
 }
-
-int CheckLineI(std::ifstream& file)
+/*Функция ввода целочисленного значения из файла*/
+int CheckLineIMoreThen1(std::ifstream& file)
 {
     std::string temp_v = "";//Объявление переменной строки
     try
@@ -151,7 +146,28 @@ int CheckLineI(std::ifstream& file)
         throw CheckException("Произошла ошибка при чтении информации из фаила");//Выброс ошибки пользовательского типа
     }
 }
+int CheckLineIMoreThen0(std::ifstream& file)
+{
+    std::string temp_v = "";//Объявление переменной строки
+    try
+    {
+        std::getline(file, temp_v);//Запись строки введёной на консоль в переменную temp_s
+        int temp_i = stoi(temp_v);//Преобразование строки в целочисленный тип
+        if (temp_i < 1)
 
+        {
+            throw  std::exception();//Выброс ошибки
+        }
+        else
+
+            return temp_i;
+    }
+    catch (const std::exception&)//Обработка ошибки
+    {
+        throw CheckException("Произошла ошибка при чтении информации из фаила");//Выброс ошибки пользовательского типа
+    }
+}
+/*Функция ввода строки значения из файла*/
 std::string CheckLineS(std::ifstream& file)
 {
     std::string temp_v = "";
