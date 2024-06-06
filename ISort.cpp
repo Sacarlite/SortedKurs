@@ -58,6 +58,9 @@ void InsertionSort::Sort()
 
                 int temp = tmp_vec[k];
                 int j = k - 1;
+                if (temp <= tmp_vec[j] && tmp_vec.size() == 2) {
+                    comparison_counter++;
+                }
                 while (j >= 0 && temp > tmp_vec[j])
                 {
                     comparison_counter++;
