@@ -5,9 +5,9 @@ std::vector<std::vector<int>> RandomDataInput()
 	int lower_bound = 0;
 	int higher_bound = 0;
 	std::vector<std::vector<int>> matrix;
-	std::cout << "¬ведите размерность матрицы n X m." << std::endl;
+	std::cout << "¬ведите размерность матрицы n(кол-во строк)Xm(кол-во столбцов)." << std::endl;
 	std::cout << "¬ведите количество строк n=";
-	int n = GetPositiveIntMoreThen1();
+	int n = GetPositiveIntMoreThen0();
 	std::cout << "¬ведите количество столбцов m=";
 	int m = GetPositiveIntMoreThen0();
 	while (true) {

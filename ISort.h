@@ -54,6 +54,7 @@ private:
 
 	void QuickSort(std::vector<int>& arr, int start, int end);//Функция быстрой сортироыки
 	int Partition(std::vector<int>& arr, int start, int end);//Функция определения опорного элемента
+	void SwapElements(std::vector<int>& arr, int i, int j);
 public:
 	QuickSortMat(std::vector<std::vector<int>> matrix);//Конструктор класса быстрой сортировки 
 	void Sort() override;//Переопределения метода сортировки

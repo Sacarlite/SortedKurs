@@ -27,7 +27,7 @@ int main()
 	do
 	{
 		ShowInputOption(); //Вывод типа вввода
-		userChoice = GetMenuChoise(); //Ввод пользовательского решения
+		userChoice = GetMenuChoice(); //Ввод пользовательского решения
 		switch (userChoice) //switch выбора консольного ввода или файлового
 		{
 		case (ManualInput):
@@ -46,7 +46,7 @@ int main()
 
 		if (userChoice != FileInput) {
 			ShowOutputType(); //Вывод сообщения об сохранении выбранных данных в файл
-			userChoice = GetChoise(); // Ввод пользовательского решения
+			userChoice = GetChoice(); // Ввод пользовательского решения
 			if (userChoice == Yes)
 			{
 				InputDataFileOutput(matrix); //Сохранение введёной матрицы в файл
@@ -68,13 +68,13 @@ int main()
 		selectionPtr->Sort();//Вызов метода сортировки
 		InfoVec.push_back(selectionPtr);//Добавление указателя в вектор
 
-		std::shared_ptr<QuickSortMat> quickPtr (new QuickSortMat(matrix));//Создание умного указателя на быстрою сортировку
+		std::shared_ptr<QuickSortMat> quickPtr (new QuickSortMat(matrix));//Создание умного указателя на быструю сортировку
 		quickPtr->Sort();//Вызов метода сортировки
 		InfoVec.push_back(quickPtr);//Добавление указателя в вектор
 
 		SortInfoOutput(InfoVec);//Вывод результатов сортировок на консоль
 		ShowOutputType(); //Вывод сообщения об сохранении выбранных данных в файл
-		userChoice = GetChoise(); // Ввод пользовательского решения
+		userChoice = GetChoice(); // Ввод пользовательского решения
 		if (userChoice == Yes)
 		{
 			OutDataFileOutput(InfoVec,matrix); //Сохранение итогового массива в фаил

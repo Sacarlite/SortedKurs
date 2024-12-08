@@ -40,7 +40,7 @@ void ShowOutputType()
 }
 
 
-void ShowOutputChoise()
+void ShowOutputChoice()
 {
 	std::cout << "Вы хотите перезаписать данный фаил?" << std::endl;
 	std::cout << "1)Да" << std::endl;

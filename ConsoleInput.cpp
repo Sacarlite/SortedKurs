@@ -3,9 +3,9 @@
 std::vector<std::vector<int>> ConsoleInput()
 {
 	std::vector<std::vector<int>> matrix;//ќбъ€вление матрицы
-	std::cout << "¬ведите размерность матрицы n(кол-во строк)Xm(кол-во столбцов). ”читывайте что дл€ работы алгоритма кол-во строк должно быть не меньше 2х." << std::endl;
+	std::cout << "¬ведите размерность матрицы n(кол-во строк)Xm(кол-во столбцов)." << std::endl;
 	std::cout << "¬ведите количество строк n=";
-	int n = GetPositiveIntMoreThen1();//¬вод переменной строк больше 1
+	int n = GetPositiveIntMoreThen0();//¬вод переменной строк больше 0
 	std::cout << "¬ведите количество столбцов m=";
 	int m = GetPositiveIntMoreThen0();//¬вод переменной столбцов больше 0
 	for (int i = 0; i < n; i++)//ѕеребор по строкам
@@ -13,7 +13,7 @@ std::vector<std::vector<int>> ConsoleInput()
 		std::vector<int> row;//ќбъ€вление вектора строки
 		for (int j = 0; j < m; j++) {//ѕеребор по столбцам
 
-			std::cout << "matrix[" << i + 1 << "][" << j + 1 << "] = " << std::endl;
+			std::cout << "matrix[" << i + 1 << "][" << j + 1 << "] = ";
 			row.push_back(GetInt());//«аполнение элемента строки и добавление его в конец вектора
 			std::cout << "" << std::endl;
 		}

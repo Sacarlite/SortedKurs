@@ -32,13 +32,13 @@ std::vector<std::vector<int>> FileDataInput()
 			
 			std::vector<int> tmpVec;//ќбъ€вление строки матрицы 
 			std::string str;//ќбъ€вление вводимой строки 
-			int n = CheckLineIMoreThen1(file);//—читывани€ количества строк
+			int n = CheckLineIMoreThen0(file);//—читывани€ количества строк
 			int m = CheckLineIMoreThen0(file);//—читыва€ количества столбоцов 
 			for (int i = 0; i < n; i++) {
 				str = CheckLineS(file);//—читывни€ строки
 				std::vector<std::string> strin;
 				std::string tmp_string;
-				/*—читывани€ эдемента матрицы*/
+				/*—читывани€ элемента матрицы*/
 				for (int j = 0; j <= str.size(); j++) {
 					if ((!isdigit(str[j])) || str[j] == '\n')
 					{
